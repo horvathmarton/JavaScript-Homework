@@ -1,0 +1,14 @@
+{
+  "name": "JavaScript-Homework",
+  "version": "1.0.0",
+  "main": "index.js",
+  "scripts": {
+    "start": "nodemon"
+  },
+  "repository": "git@github.com:horvathmarton/JavaScript-Homework.git",
+  "author": "Marton Horvath <horvathmarton@sch.bme.hu>",
+  "license": "MIT",
+  "dependencies": {
+    "express": "^4.16.2"
+  }
+}
