@@ -1,0 +1,8 @@
+* {
+    font-family: 'Montserrat', sans-serif;
+    user-select: none;
+}
+
+a.nav-link.btn-menu:hover {
+    color: #F8F9FA !important;
+}
