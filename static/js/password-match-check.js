@@ -1,3 +1,5 @@
+// Source: https://stackoverflow.com/questions/9717588/checking-password-match-while-typing
+
 var password = document.getElementById("password");
 var confirm_password = document.getElementById("confirm_password");
 
