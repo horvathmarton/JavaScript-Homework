@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>Recept portál</title>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
+    <link href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet" integrity="sha384-wvfXpqpZZVQGK6TAh5PVlGOfQNHSoD2xbE+QkPxCAFlNEevoEH3Sl0sibVcOQVnN" crossorigin="anonymous">
+    <link href="https://fonts.googleapis.com/css?family=Montserrat" rel="stylesheet">
+
+    <link rel="stylesheet" href="css/style.css">
+    <link rel="stylesheet" href="css/form-glow-magic.css">
+</head>
+<body>
+    <div class="container-fluid">
+
+        <a class="btn btn-outline-secondary float-left d-none d-md-block" href="logged-in-dashboard.html"><i class="fa fa-angle-left fa-3x"></i></a>
+
+        <h1 class="text-center display-1 d-none d-md-block text-secondary m-5">Új Recept</h1>
+        <h1 class="text-center d-block d-md-none text-secondary m-5">Új Recept</h1>
+
+        <div class="col-10 offset-1 col-md-4 offset-md-4">
+            <form action="/logged-in-dashboard.html" method="get">
+                <div class="form-group">
+                    <input type="text" class="form-control form-control-lg" id="name" placeholder="Recept neve" required autofocus>
+                </div>
+                <div class="form-group">
+                    <label for="time" class="text-secondary">Elkészítés ideje:</label>
+                    <select class="form-control form-control-lg" id="time">
+                        <option>15 perc</option>
+                        <option>30 perc</option>
+                        <option>45 perc</option>
+                        <option>1 óra</option>
+                        <option>1.5 óra</option>
+                        <option>2 óra</option>
+                    </select>
+                </div>
+                <div class="form-group">
+                    <label for="difficulty" class="text-secondary">Nehézség:</label>
+                    <select class="form-control form-control-lg" id="difficulty">
+                        <option>1</option>
+                        <option>2</option>
+                        <option>3</option>
+                        <option>4</option>
+                        <option>5</option>
+                    </select>
+                </div>
+                <div class="form-group">
+                    <textarea class="form-control form-control-lg" id="description" rows="8" placeholder="A recept elkészítésének leírása..."></textarea>
+                </div>
+                <div class="custom-file mb-3">
+                    <input type="file" class="custom-file-input" id="picture">
+                    <label class="custom-file-label" for="picture">Tölts fel egy képet róla...</label>
+                </div>
+                <button type="submit" class="btn btn-block btn-outline-secondary mb-5">Létrehozás</button>
+            </form>
+        </div>
+
+    </div>
+
+</body>
+</html>
