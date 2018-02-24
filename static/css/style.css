@@ -3,6 +3,10 @@
     user-select: none;
 }
 
+div.brand-name {
+    font-weight: 400;
+}
+
 a.nav-link.btn-menu:hover {
     color: #F8F9FA !important;
 }
