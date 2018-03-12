@@ -21,9 +21,19 @@ const getUsers = () => {
     return userStore;
 };
 
+const getUser = (id) => {
+    userStore.forEach((user) => {
+        if (user.id === id) {
+            return user;
+        }
+    });
+    return null;
+};
+
 const addUser = (user) => {
     userStore.push(user);
 };
 
 module.exports.getUsers = getUsers;
+module.exports.getUser = getUser;
 module.exports.addUser = addUser;
