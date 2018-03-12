@@ -1,24 +1,49 @@
 const express = require('express');
 const ROUTER = express.Router();
 
-ROUTER.get('/', (req, res, next) => {
-    res.send(`<h1>List all recipies</h1>`);
-});
+const RENDER_MW = require('../middleware/render-page');
 
-ROUTER.get('/new', (req, res, next) => {
-    res.send(`<h1>Create new recipie</h1>`);
-});
+ROUTER.get('/',
+    GET_ALL_RECIPIES_MW,
+    RENDER_MW('/dashboard.html')
+);
 
-ROUTER.get('/:id', (req, res, next) => {
-    res.send(`<h1>Show recipie ${req.params.id}</h1>`);
-});
+ROUTER.get('/new',
+    AUTH_MW(),
+    RENDER_MW('/createrecipie.html')
+);
 
-ROUTER.get('/edit/:id', (req, res, next) => {
-    res.send(`<h1>Edit recipie ${req.params.id}</h1>`);
-});
+ROUTER.post('/new',
+    AUTH_MW(),
+    UPDATE_RECIPIE_MW,
+    REDIRECT_MW('/recipes')
+);
 
-ROUTER.get('/delete/:id', (req, res, next) => {
-    res.send(`<h1>Delete recipie ${req.params.id}</h1>`);
-});
+ROUTER.get('/:id',
+    AUTH_MW(),
+    GET_RECIPIE_MW,
+    RENDER_MW('/recipie.html')
+);
+
+ROUTER.get('/:id/edit',
+    AUTH_MW(),
+    AUTHORIZE_MW,
+    GET_RECIPIE_MW,
+    RENDER_MW('/createrecipie.html')
+);
+
+ROUTER.put('/:id/edit',
+    AUTH_MW(),
+    AUTHORIZE_MW,
+    GET_RECIPIE_MW,
+    UPDATE_RECIPIE_MW
+);
+
+ROUTER.delete('/:id/delete',
+    AUTH_MW(),
+    AUTHORIZE_MW,
+    GET_RECIPIE_MW,
+    DELETE_RECIPIE_MW
+);
 
 module.exports = ROUTER;

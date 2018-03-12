@@ -1,12 +1,17 @@
 const express = require('express');
 const ROUTER = express.Router();
 
-ROUTER.get('/new', (req, res, next) => {
-    res.send(`<h1>Register new user</h1>`);
-});
+const RENDER_MW = require('../middleware/render-page');
 
-ROUTER.get('/:id', (req, res, next) => {
-    res.send(`<h1>Show user ${req.params.id}</h1>`);
-});
+ROUTER.post('/new',
+    AUTH_MW(true),
+    REGISTER_MW,
+    REDIRECT_MW('/')
+);
+
+ROUTER.get('/:id',
+    AUTH_MW(false),
+    RENDER_MW('/profile.html')
+);
 
 module.exports = ROUTER;
