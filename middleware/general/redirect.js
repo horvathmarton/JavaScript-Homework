@@ -1,7 +1,7 @@
-const REDIRECT = (page) => {
+const REDIRECT = (endpoint) => {
 
     return (req, res) => {
-        res.redirect(page);
+        res.redirect(endpoint);
     }
 
 };
