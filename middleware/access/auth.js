@@ -10,12 +10,15 @@ const AUTH = (inverse = false) => {
 
     return (req, res, next) => {
 
-        if (XOR(inverse, res.locals.user === 'undefined')) {
+        console.log(res.locals.user);
+
+        if (XOR(inverse, typeof res.locals.user === 'undefined')) {
             console.log('Authentication failed!');
             res.redirect(redirectUrl);
+        } else {
+            console.log('Authentication succeeded!');
+            return next();
         }
-        console.log('Authentication succeeded!');
-        next();
 
     };
 

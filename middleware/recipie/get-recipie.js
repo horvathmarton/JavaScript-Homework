@@ -14,7 +14,7 @@ const RECIPE_GETTER = (req, res, next) => {
         res.redirect('/')
     }
 
-    next();
+    return next();
 
 };
 

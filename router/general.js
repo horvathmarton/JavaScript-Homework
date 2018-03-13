@@ -14,7 +14,7 @@ ROUTER.get('/',
 
 ROUTER.get('/login',
     AUTH_MW(true),
-    RENDER_MW('/login.html')
+    RENDER_MW('login.html')
 );
 
 ROUTER.post('/login',
@@ -24,7 +24,7 @@ ROUTER.post('/login',
 
 ROUTER.get('/register',
     AUTH_MW(true),
-    RENDER_MW('/register.html')
+    RENDER_MW('register.html')
 );
 
 ROUTER.delete('/logout',

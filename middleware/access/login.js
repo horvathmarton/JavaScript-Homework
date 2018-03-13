@@ -23,7 +23,7 @@ const LOGIN = (req, res, next) => {
 
     errorMessage += 'Wrong username or password!'
     console.log(errorMessage);
-    next();
+    return next();
 
 };
 

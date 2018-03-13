@@ -15,7 +15,7 @@ ROUTER.post('/new',
 
 ROUTER.get('/:id',
     AUTH_MW(false),
-    RENDER_MW('/profile.html')
+    RENDER_MW('profile.html')
 );
 
 module.exports = ROUTER;

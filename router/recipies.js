@@ -1,6 +1,7 @@
 const express = require('express');
 
 const AUTH_MW = require('../middleware/access/auth');
+const HOME_REDIRECT_MW = require('../middleware/access/homeRedirect');
 const RENDER_MW = require('../middleware/general/render-page');
 const GET_ALL_RECIPIES_MW = require('../middleware/recipie/get-all-recipie');
 const GET_RECIPIE_MW = require('../middleware/recipie/get-recipie');
@@ -9,12 +10,12 @@ const ROUTER = express.Router();
 
 ROUTER.get('/',
     GET_ALL_RECIPIES_MW,
-    RENDER_MW('/dashboard.html')
+    HOME_REDIRECT_MW
 );
 
 ROUTER.get('/new',
     AUTH_MW(),
-    RENDER_MW('/createrecipie.html')
+    RENDER_MW('create-recipie.html')
 );
 
 // ROUTER.post('/new',
@@ -26,14 +27,14 @@ ROUTER.get('/new',
 ROUTER.get('/:id',
     AUTH_MW(),
     GET_RECIPIE_MW,
-    RENDER_MW('/recipie.html')
+    RENDER_MW('recipie.html')
 );
 
 // ROUTER.get('/:id/edit',
 //     AUTH_MW(),
 //     AUTHORIZE_MW,
 //     GET_RECIPIE_MW,
-//     RENDER_MW('/createrecipie.html')
+//     RENDER_MW('/create-recipie.html')
 // );
 //
 // ROUTER.put('/:id/edit',
