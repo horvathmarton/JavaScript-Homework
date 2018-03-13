@@ -22,12 +22,13 @@ const getRecipies = () => {
 };
 
 const getRecipie = (id) => {
-    recipieStore.forEach((recipie) => {
-        if (recipie.id === id) {
-            return recipie;
+    let recipie = null;
+    recipieStore.forEach((rec) => {
+        if (rec.id === id) {
+            recipie = rec;
         }
     });
-    return null;
+    return recipie;
 };
 
 const addRecipie = (recipie) => {
