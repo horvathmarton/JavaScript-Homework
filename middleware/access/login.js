@@ -15,15 +15,17 @@ const LOGIN = (req, res, next) => {
 
     userStore.getUsers().forEach((user) => {
         if (user.email === req.body.email && user.password === req.body.password) {
-            res.locals.user = user;
+            req.session.user = user;
             console.log('Logged in successfully!');
             res.redirect('/');
         }
     });
 
-    errorMessage += 'Wrong username or password!'
-    console.log(errorMessage);
-    return next();
+    if (typeof req.session.user === 'undefined') {
+        errorMessage += 'Wrong username or password!';
+        console.log(errorMessage);
+        res.redirect('/login');
+    }
 
 };
 

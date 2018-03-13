@@ -7,7 +7,7 @@ const options = {
 
 const REDIRECT = (req, res, next) => {
 
-    if (typeof res.locals.user === 'undefined') {
+    if (typeof req.session.user === 'undefined') {
         res.sendFile('dashboard.html', options);
     } else {
         res.sendFile('logged-in-dashboard.html', options);

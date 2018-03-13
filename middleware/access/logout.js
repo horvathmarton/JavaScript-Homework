@@ -1,6 +1,6 @@
 const LOGOUT = (req, res) => {
 
-    delete res.locals.user;
+    delete req.session.user;
     res.redirect('/');
 
 };

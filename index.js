@@ -1,5 +1,6 @@
 const express = require('express');
 const bodyParser = require('body-parser');
+const session = require('express-session');
 
 const generalRouter = require('./router/general');
 const usersRouter = require('./router/users');
@@ -11,6 +12,11 @@ const PORT = process.env.PORT || 3000;
 
 APP.use(bodyParser.urlencoded({ extended: true }));
 APP.use(bodyParser.json());
+APP.use(session({
+    secret: 'keyboard cat',
+    resave: false,
+    saveUninitialized: true
+}));
 
 APP.use(express.static('static'));
 

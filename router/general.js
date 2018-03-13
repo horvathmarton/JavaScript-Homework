@@ -27,7 +27,7 @@ ROUTER.get('/register',
     RENDER_MW('register.html')
 );
 
-ROUTER.delete('/logout',
+ROUTER.get('/logout',
     AUTH_MW(false),
     LOGOUT_MW
 );
