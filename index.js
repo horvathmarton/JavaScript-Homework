@@ -1,22 +1,23 @@
 const express = require('express');
-const APP = express();
 const bodyParser = require('body-parser');
 
-const general = require('./router/general');
-const users = require('./router/users');
-const recipies = require('./router/recipies');
+const generalRouter = require('./router/general');
+const usersRouter = require('./router/users');
+const recipiesRouter = require('./router/recipies');
 
-const PORT = 3000;
+const APP = express();
 const IP = "0.0.0.0";
+const PORT = process.env.PORT || 3000;
 
 APP.use(bodyParser.urlencoded({ extended: true }));
 APP.use(bodyParser.json());
 
 APP.use(express.static('static'));
-APP.use('/', general);
-APP.use('/users', users);
-APP.use('/recipies', recipies);
 
-const SERVER = APP.listen(PORT, IP, () => {
+APP.use('/', generalRouter);
+APP.use('/users', usersRouter);
+APP.use('/recipies', recipiesRouter);
+
+APP.listen(PORT, IP, () => {
     console.log(`Running on port ${PORT}...`);
 });

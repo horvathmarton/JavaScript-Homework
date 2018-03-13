@@ -2,8 +2,15 @@ const userStore = require('../../stores/user-store');
 
 const LOGIN = (req, res, next) => {
 
-    if ((typeof req.body === 'undefined') || (typeof req.body.email === 'undefined') || (typeof req.body.password === 'undefined')) {
-        res.end('Problem');
+    let errorMessage = 'Failed to log in: ';
+
+    if ((typeof req.body === 'undefined') || (typeof req.body.email === 'undefined') ||
+        (typeof req.body.password === 'undefined')) {
+
+        errorMessage += 'Form data is missing!';
+        console.log(errorMessage);
+        res.redirect('/login');
+
     }
 
     userStore.getUsers().forEach((user) => {
@@ -14,7 +21,9 @@ const LOGIN = (req, res, next) => {
         }
     });
 
-    res.redirect('/login');
+    errorMessage += 'Wrong username or password!'
+    console.log(errorMessage);
+    next();
 
 };
 

@@ -1,10 +1,11 @@
 const express = require('express');
-const ROUTER = express.Router();
 
 const AUTH_MW = require('../middleware/access/auth');
 const RENDER_MW = require('../middleware/general/render-page');
 const GET_ALL_RECIPIES_MW = require('../middleware/recipie/get-all-recipie');
 const GET_RECIPIE_MW = require('../middleware/recipie/get-recipie');
+
+const ROUTER = express.Router();
 
 ROUTER.get('/',
     GET_ALL_RECIPIES_MW,

@@ -1,10 +1,11 @@
 const express = require('express');
-const ROUTER = express.Router();
 
 const AUTH_MW = require('../middleware/access/auth');
 const REGISTER_MW = require('../middleware/access/register');
 const REDIRECT_MW = require('../middleware/general/redirect');
 const RENDER_MW = require('../middleware/general/render-page');
+
+const ROUTER = express.Router();
 
 ROUTER.post('/new',
     AUTH_MW(true),

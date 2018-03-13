@@ -1,11 +1,12 @@
 const express = require('express');
-const ROUTER = express.Router();
 
 const AUTH_MW = require('../middleware/access/auth');
 const LOGIN_MW = require('../middleware/access/login');
 const LOGOUT_MW = require('../middleware/access/logout');
 const REDIRECT_MW = require('../middleware/general/redirect');
 const RENDER_MW = require('../middleware/general/render-page');
+
+const ROUTER = express.Router();
 
 ROUTER.get('/',
     REDIRECT_MW('/recipies')
