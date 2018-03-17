@@ -37,4 +37,9 @@ ROUTER.get('/forgotten',
     RENDER_MW('/forgotten.html')
 );
 
+ROUTER.post('/forgotten',
+    AUTH_MW(false),
+    FORGOTTEN_MW
+);
+
 module.exports = ROUTER;
