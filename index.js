@@ -4,6 +4,7 @@ const session = require('express-session');
 
 const GENERAL_ROUTER = require('./router/general');
 const USERS_ROUTER = require('./router/users');
+const RATINGS_ROUTER = require('./router/rating');
 const RECIPIES_ROUTER = require('./router/recipies');
 
 // Basic infos
@@ -29,7 +30,14 @@ APP.use(session({
 // Routing
 APP.use('/', GENERAL_ROUTER);
 APP.use('/users', USERS_ROUTER);
+APP.use('/ratings', RATINGS_ROUTER);
 APP.use('/recipies', RECIPIES_ROUTER);
+
+// Error handling
+APP.use((err, req, res, next) => {
+    res.status(500).send('Houston, we have a problem!');
+    console.error(err.stack);
+});
 
 // Start the server
 APP.listen(PORT, IP, () => {
