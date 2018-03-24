@@ -28,3 +28,5 @@ ROUTER.post('/:recipie_id/:user_id',
     GET_RATING_MW({ rating_db: RATING_STORE }),
     UPDATE_RATING_MW({ rating_db: RATING_STORE })
 );
+
+module.exports = ROUTER;
