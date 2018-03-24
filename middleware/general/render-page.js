@@ -2,7 +2,7 @@ const RENDERER = ({ template }) => {
 
     return (req, res) => {
         const opts = {
-            logged_id: ('undefined' === typeof req.session.user)
+            logged_id: ('undefined' === typeof req.session.user),
         };
         res.render(template, opts);
     }

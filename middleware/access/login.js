@@ -23,6 +23,7 @@ const LOGIN = ({ user_db }) => {
             }
         });
 
+        res.locals.alert_danger = 'Wrong username or password!';
         errorMessage += 'Wrong username or password!';
         console.log(errorMessage);
         res.redirect('/login');
