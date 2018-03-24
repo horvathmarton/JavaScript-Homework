@@ -1,0 +1,31 @@
+<%- include('html-header') %>
+
+<%- include('header') %>
+
+<main>
+
+    <h1 class="text-center text-secondary display-1 d-none d-md-block m-5">Receptek</h1>
+    <h1 class="text-center text-secondary d-block d-md-none m-5">Receptek</h1>
+
+    <div class="row text-center">
+
+        <% recipies.forEach((recipie) => { %>
+            <div class="col-12 col-md-6 col-lg-4 p-3">
+                <div class="card">
+                    <div class="card-header text-center text-secondary">
+                        <h1 class="d-none d-lg-block"><%= recipie.name %></h1>
+                        <h3 class="d-block d-lg-none"><%= recipie.name %></h3>
+                    </div>
+                    <img class="card-img" src="https://lorempixel.com/640/480/food/1/">
+                    <div class="card-body text-center">
+                        <a class="btn btn-lg btn-outline-secondary" href=<%= `/recipies/${recipie.id}` %> >Megnézem</a>
+                    </div>
+                </div>
+            </div>
+        <% }) %>
+
+    </div>
+
+</main>
+
+<%- include('html-footer') %>

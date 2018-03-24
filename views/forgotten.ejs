@@ -1,0 +1,23 @@
+<%- include('html-header') %>
+
+<%- include('header') %>
+
+<main>
+
+    <a class="btn btn-outline-secondary float-left d-none d-md-block" href="/"><i class="fa fa-angle-left fa-3x"></i></a>
+
+    <h1 class="text-center display-1 d-none d-md-block text-secondary m-5">Elfelejtett jelszó</h1>
+    <h1 class="text-center d-block d-md-none text-secondary m-5">Elfelejtett jelszó</h1>
+
+    <div class="col-10 offset-1 col-md-4 offset-md-4">
+        <div id="alert-warn" class="alert alert-danger d-none" role="alert"></div>
+        <div class="form-group">
+            <input type="email" class="form-control form-control-lg" id="email" placeholder="Email cím" autofocus>
+        </div>
+        <button id="btn-forgotten" class="btn btn-block btn-outline-secondary mb-5">Jelszó megjelenítése</button>
+        <div id="alert-forgotten" class="alert alert-secondary d-none" role="alert"></div>
+    </div>
+
+</main>
+
+<%- include('html-footer') %>

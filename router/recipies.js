@@ -15,13 +15,13 @@ const UPDATE_RECIPIE_MW = require('../middleware/recipie/update-recipie');
 // List all
 ROUTER.get('/',
     GET_ALL_RECIPIE_MW({ recipie_db: RECIPIE_STORE }),
-    RENDER_MW({ template: 'dashboard.html' })
+    RENDER_MW({ template: 'dashboard.ejs' })
 );
 
 // Create new
 ROUTER.get('/new',
     AUTH_MW({ inverse: false }),
-    RENDER_MW({ template: 'create-recipie.html' })
+    RENDER_MW({ template: 'create-recipie.ejs' })
 );
 
 ROUTER.post('/new',
@@ -34,7 +34,7 @@ ROUTER.post('/new',
 ROUTER.get('/:recipie_id',
     AUTH_MW({ inverse: false }),
     GET_RECIPIE_MW({ recipie_db: RECIPIE_STORE }),
-    RENDER_MW({ template: 'recipie.html' })
+    RENDER_MW({ template: 'recipie.ejs' })
 );
 
 // Edit
@@ -42,7 +42,7 @@ ROUTER.get('/:recipie_id/edit',
     AUTH_MW({ inverse: false }),
     AUTHORIZE_MW({ user_db: USER_STORE }),
     GET_RECIPIE_MW({ recipie_db: RECIPIE_STORE }),
-    RENDER_MW({ template: 'create-recipie.html' })
+    RENDER_MW({ template: 'create-recipie.ejs' })
 );
 
 ROUTER.put('/:recipie_id/edit',

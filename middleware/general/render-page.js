@@ -1,13 +1,10 @@
-const path = require('path');
-const appDir = path.dirname(require.main.filename);
-const options = {
-    root: appDir + '/static/'
-};
-
 const RENDERER = ({ template }) => {
 
     return (req, res) => {
-        res.sendFile(template, options);
+        const opts = {
+            logged_id: ('undefined' === typeof req.session.user)
+        };
+        res.render(template, opts);
     }
 
 };

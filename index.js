@@ -11,6 +11,12 @@ const APP = express();
 const IP = "0.0.0.0";
 const PORT = process.env.PORT || 3000;
 
+// Template engine
+APP.set('views engine', 'ejs');
+
+// Static folder
+APP.use(express.static('public'));
+
 // Configuring vendor modules
 APP.use(bodyParser.urlencoded({ extended: true }));
 APP.use(bodyParser.json());

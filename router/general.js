@@ -17,7 +17,7 @@ ROUTER.get('/',
 // Login - logout
 ROUTER.get('/login',
     AUTH_MW({ inverse: true }),
-    RENDER_MW({ template: 'login.html' })
+    RENDER_MW({ template: 'login.ejs' })
 );
 
 ROUTER.post('/login',
@@ -33,13 +33,13 @@ ROUTER.get('/logout',
 // Register
 ROUTER.get('/register',
     AUTH_MW({ inverse: true }),
-    RENDER_MW({ template: 'register.html' })
+    RENDER_MW({ template: 'register.ejs' })
 );
 
 // Forgotten password
 ROUTER.get('/forgotten',
     AUTH_MW({ inverse: true }),
-    RENDER_MW({ template: 'forgotten.html' })
+    RENDER_MW({ template: 'forgotten.ejs' })
 );
 
 ROUTER.post('/forgotten',

@@ -17,7 +17,7 @@ ROUTER.post('/new',
 // Show user
 ROUTER.get('/:user_id',
     AUTH_MW({ inverse: false }),
-    RENDER_MW({ template: 'profile.html' })
+    RENDER_MW({ template: 'profile.ejs' })
 );
 
 module.exports = ROUTER;
