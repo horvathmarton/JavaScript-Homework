@@ -35,12 +35,6 @@ const addRecipie = (recipie) => {
     recipieStore.push(recipie);
 };
 
-const editRecipie = (id, updated) => {
-    const recipie = getRecipie(id);
-    const index = recipie.indexOf(recipie);
-    recipieStore.splice(index, 1, updated);
-};
-
 const deleteRecipie = (id) => {
     const recipie = getRecipie(id);
     const index = recipie.indexOf(recipie);
@@ -50,5 +44,4 @@ const deleteRecipie = (id) => {
 module.exports.getRecipies = getRecipies;
 module.exports.getRecipie = getRecipie;
 module.exports.addRecipie = addRecipie;
-module.exports.editRecipie = editRecipie;
 module.exports.deleteRecipie = deleteRecipie;

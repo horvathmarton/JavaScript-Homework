@@ -1,7 +1,8 @@
-const REDIRECT = (endpoint) => {
+const REDIRECT = ({ route }) => {
 
-    return (req, res) => {
-        res.redirect(endpoint);
+    return (req, res, next) => {
+        res.redirect(route);
+        return next();
     }
 
 };

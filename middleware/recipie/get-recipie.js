@@ -1,23 +1,28 @@
-const recipieStore = require('../../stores/recipie-store');
+const RECIPIE_GETTER = ({ recipie_db }) => {
 
-const RECIPE_GETTER = (req, res, next) => {
+    return (req, res, next) => {
 
-    console.log(req.params);
+        if ('undefined' === typeof recipie_db) {
+            throw Error('No recipie database specified');
+        }
 
-    if (typeof req.params === 'undefined' || typeof req.params.id === 'undefined') {
-        console.log('No recipie id specified!');
-        res.redirect('/');
-    }
+        if (typeof req.params === 'undefined' || typeof req.params.id === 'undefined') {
+            console.log('No recipie id specified!');
+            res.redirect('/');
+            return next();
+        }
 
-    res.locals.recipie = recipieStore.getRecipie(parseInt(req.params.id));
+        res.locals.recipie = recipieStore.getRecipie(parseInt(req.params.id));
 
-    if (res.locals.recipie === null) {
-        console.log('Recipie not found!');
-        res.redirect('/');
-    }
+        if (null === res.locals.recipie) {
+            console.log('Recipie not found!');
+            res.redirect('/');
+        }
 
-    return next();
+        return next();
+
+    };
 
 };
 
-module.exports = RECIPE_GETTER;
+module.exports = RECIPIE_GETTER;

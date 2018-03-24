@@ -1,30 +1,32 @@
-const userStore = require('../../stores/user-store');
+const FORGOTTEN = ({ user_db }) => {
 
-const FORGOTTEN = (req, res) => {
+    return (req, res, next) => {
 
-    let errorMessage = 'Failed to log in: ';
+        let errorMessage = 'Failed to log in: ';
 
-    if ((typeof req.body === 'undefined') || (typeof req.body.email === 'undefined')) {
+        if (('undefined' === typeof req.body) || ('undefined' === typeof req.body.email)) {
 
-        errorMessage += 'Form data is missing!';
+            errorMessage += 'Form data is missing!';
+            console.log(errorMessage);
+            res.redirect('/forgotten');
+            return next();
+
+        }
+
+        user_db.getUsers().forEach((user) => {
+            if (req.body.email === user.email) {
+                console.log('Email address found!');
+                res.send({'password': password});
+                return next();
+            }
+        });
+
+        errorMessage += 'This email address is not registered!';
         console.log(errorMessage);
         res.redirect('/forgotten');
+        return next();
 
-    }
-
-    userStore.getUsers().forEach((user) => {
-        if (user.email === req.body.email && user.password === req.body.password) {
-            req.session.user = user;
-            console.log('Logged in successfully!');
-            res.redirect('/');
-        }
-    });
-
-    if (typeof req.session.user === 'undefined') {
-        errorMessage += 'Wrong username or password!';
-        console.log(errorMessage);
-        res.redirect('/login');
-    }
+    };
 
 };
 

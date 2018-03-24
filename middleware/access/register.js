@@ -1,25 +1,29 @@
-const userStore = require('../../stores/user-store');
+const REGISTER = ({ user_db }) => {
 
-const REGISTER = (req, res) => {
+    return (req, res, next) => {
 
-    let errorMessage = 'Failed to register: ';
+        let errorMessage = 'Failed to register: ';
 
-    if ((typeof req.body === 'undefined') || (typeof req.body.email === 'undefined') ||
-        (typeof req.body.password === 'undefined')) {
+        if (('undefined' === typeof req.body) || ('undefined' === typeof req.body.email) ||
+            ('undefined' === typeof req.body.password)) {
 
-        errorMessage += 'Form data is missing!';
-        console.log(errorMessage);
-        res.redirect('/register');
+            errorMessage += 'Form data is missing!';
+            console.log(errorMessage);
+            res.redirect('/register');
+            return next();
 
-    }
+        }
 
-    userStore.addUser({
-       id: Math.floor((Math.random() * 1000000) + 1),
-       email: req.body.email,
-       password: req.body.password
-    });
+        user_db.addUser({
+            id: Math.floor((Math.random() * 1000000) + 1),
+            email: req.body.email,
+            password: req.body.password
+        });
 
-    res.redirect('/');
+        res.redirect('/');
+        return next();
+
+    };
 
 };
 

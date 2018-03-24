@@ -15,7 +15,7 @@ ROUTER.post('/new',
 );
 
 // Show user
-ROUTER.get('/:id',
+ROUTER.get('/:user_id',
     AUTH_MW({ inverse: false }),
     RENDER_MW({ template: 'profile.html' })
 );

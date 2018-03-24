@@ -8,6 +8,7 @@ const AUTHORIZE_MW = require('../middleware/access/authorize');
 const DELETE_RECIPIE_MW = require('../middleware/recipie/delete-recipie');
 const GET_ALL_RECIPIE_MW = require('../middleware/recipie/get-all-recipie');
 const GET_RECIPIE_MW = require('../middleware/recipie/get-recipie');
+const REDIRECT_MW = require('../middleware/general/redirect');
 const RENDER_MW = require('../middleware/general/render-page');
 const UPDATE_RECIPIE_MW = require('../middleware/recipie/update-recipie');
 
@@ -30,21 +31,21 @@ ROUTER.post('/new',
 );
 
 // View one
-ROUTER.get('/:id',
+ROUTER.get('/:recipie_id',
     AUTH_MW({ inverse: false }),
     GET_RECIPIE_MW({ recipie_db: RECIPIE_STORE }),
     RENDER_MW({ template: 'recipie.html' })
 );
 
 // Edit
-ROUTER.get('/:id/edit',
+ROUTER.get('/:recipie_id/edit',
     AUTH_MW({ inverse: false }),
     AUTHORIZE_MW({ user_db: USER_STORE }),
     GET_RECIPIE_MW({ recipie_db: RECIPIE_STORE }),
     RENDER_MW({ template: 'create-recipie.html' })
 );
 
-ROUTER.put('/:id/edit',
+ROUTER.put('/:recipie_id/edit',
     AUTH_MW({ inverse: false }),
     AUTHORIZE_MW({ user_db: USER_STORE }),
     GET_RECIPIE_MW({ recipie_db: RECIPIE_STORE }),
@@ -52,7 +53,7 @@ ROUTER.put('/:id/edit',
 );
 
 // Delete
-ROUTER.delete('/:id/delete',
+ROUTER.delete('/:recipie_id/delete',
     AUTH_MW({ inverse: false }),
     AUTHORIZE_MW({ user_db: USER_STORE }),
     GET_RECIPIE_MW({ recipie_db: RECIPIE_STORE }),

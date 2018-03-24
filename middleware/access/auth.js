@@ -3,23 +3,25 @@ const XOR = (cond1, cond2) => {
     return (cond1 && !cond2) || (!cond1 && cond2);
 };
 
-const AUTH = (inverse = false) => {
+// Check if the user logged in (or logged out if the inverse flag is true)
+const AUTHENTICATE = ({ inverse = false }) => {
 
     let redirectUrl = '/';
     if (!inverse) { redirectUrl += 'login'; }
 
     return (req, res, next) => {
 
-        if (XOR(inverse, typeof req.session.user === 'undefined')) {
+        if (XOR(inverse, 'undefined' === typeof req.session.user)) {
             console.log('Authentication failed!');
             res.redirect(redirectUrl);
-        } else {
-            console.log('Authentication succeeded!');
             return next();
         }
+
+        console.log('Authentication succeeded!');
+        return next();
 
     };
 
 };
 
-module.exports = AUTH;
+module.exports = AUTHENTICATE;

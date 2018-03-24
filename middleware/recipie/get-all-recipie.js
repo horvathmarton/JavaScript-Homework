@@ -1,10 +1,16 @@
-const recipieStore = require('../../stores/recipie-store');
+const RECIPIES_GETTER = ({ recipie_db }) => {
 
-const RECIPES_GETTER = (req, res, next) => {
+    return (req, res, next) => {
 
-    res.locals.recipies = recipieStore.getRecipies();
-    return next();
+        if ('undefined' === typeof recipie_db) {
+            throw Error('No recipie database specified');
+        }
+
+        res.locals.recipies = recipie_db.getRecipies();
+        return next();
+
+    };
 
 };
 
-module.exports = RECIPES_GETTER;
+module.exports = RECIPIES_GETTER;
