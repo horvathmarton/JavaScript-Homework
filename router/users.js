@@ -1,21 +1,23 @@
-const express = require('express');
+const ROUTER = require('express').Router();
+
+const USER_STORE = require('../stores/user-store');
 
 const AUTH_MW = require('../middleware/access/auth');
 const REGISTER_MW = require('../middleware/access/register');
 const REDIRECT_MW = require('../middleware/general/redirect');
 const RENDER_MW = require('../middleware/general/render-page');
 
-const ROUTER = express.Router();
-
+// Register user
 ROUTER.post('/new',
-    AUTH_MW(true),
-    REGISTER_MW,
-    REDIRECT_MW('/')
+    AUTH_MW({ inverse: true }),
+    REGISTER_MW({ user_db: USER_STORE }),
+    REDIRECT_MW({ route: '/' })
 );
 
+// Show user
 ROUTER.get('/:id',
-    AUTH_MW(false),
-    RENDER_MW('profile.html')
+    AUTH_MW({ inverse: false }),
+    RENDER_MW({ template: 'profile.html' })
 );
 
 module.exports = ROUTER;

@@ -1,16 +1,17 @@
-// Tobbe-kevesbe mukodo verzio, memoriaban tarolt adatokkal
 const express = require('express');
 const bodyParser = require('body-parser');
 const session = require('express-session');
 
-const generalRouter = require('./router/general');
-const usersRouter = require('./router/users');
-const recipiesRouter = require('./router/recipies');
+const GENERAL_ROUTER = require('./router/general');
+const USERS_ROUTER = require('./router/users');
+const RECIPIES_ROUTER = require('./router/recipies');
 
+// Basic infos
 const APP = express();
 const IP = "0.0.0.0";
 const PORT = process.env.PORT || 3000;
 
+// Configuring vendor modules
 APP.use(bodyParser.urlencoded({ extended: true }));
 APP.use(bodyParser.json());
 APP.use(session({
@@ -19,12 +20,12 @@ APP.use(session({
     saveUninitialized: true
 }));
 
-APP.use(express.static('static'));
+// Routing
+APP.use('/', GENERAL_ROUTER);
+APP.use('/users', USERS_ROUTER);
+APP.use('/recipies', RECIPIES_ROUTER);
 
-APP.use('/', generalRouter);
-APP.use('/users', usersRouter);
-APP.use('/recipies', recipiesRouter);
-
+// Start the server
 APP.listen(PORT, IP, () => {
     console.log(`Running on port ${PORT}...`);
 });
