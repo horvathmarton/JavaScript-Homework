@@ -10,7 +10,6 @@ const LOGIN = ({ user_db }) => {
             errorMessage += 'Form data is missing!';
             console.log(errorMessage);
             res.redirect('/login');
-            return next();
 
         }
 
@@ -18,7 +17,6 @@ const LOGIN = ({ user_db }) => {
             if (req.body.email === user.email && req.body.password === user.password) {
                 req.session.user = user;
                 console.log('Logged in successfully!');
-                res.redirect('/');
                 return next();
             }
         });

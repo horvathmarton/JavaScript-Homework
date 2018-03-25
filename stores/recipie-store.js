@@ -3,17 +3,32 @@ const recipieStore = [
     {
         id: 1,
         name: 'Marhapörkölt',
-        description: 'Lorem ipsum'
+        description: 'Lorem ipsum',
+        time: 15,
+        difficulty: 'easy',
+        ratings: {
+            1: 5,
+            3: 2
+        }
     },
     {
         id: 2,
         name: 'Lecsó',
-        description: 'Lorem ipsum'
+        description: 'Lorem ipsum',
+        time: 45,
+        difficulty: 'medium',
+        ratings: {
+            2: 4,
+            3: 1
+        }
     },
     {
         id: 3,
         name: 'Kuglóf',
-        description: 'Lorem ipsum'
+        description: 'Lorem ipsum',
+        time: 30,
+        difficulty: 'hard',
+        ratings: {}
     }
 ];
 

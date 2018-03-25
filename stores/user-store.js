@@ -1,22 +1,25 @@
 // Átmeneti megoldás (adatbázis mock)
 const userStore = [
     {
-        id: 0,
+        id: 1,
         email: 'admin@admin.com',
         name: 'Admin Admin',
-        password: 'admin'
-    },
-    {
-        id: 1,
-        email: 'lorem@ipsum.com',
-        name: 'Lorem Ipsum',
-        password: 'lorem'
+        password: 'admin',
+        recipies: [1]
     },
     {
         id: 2,
+        email: 'lorem@ipsum.com',
+        name: 'Lorem Ipsum',
+        password: 'lorem',
+        recipies: []
+    },
+    {
+        id: 3,
         email: 'average@joe.com',
         name: 'Average Joe',
-        password: '1234'
+        password: '1234',
+        recipies: [2, 3]
     }
 ];
 

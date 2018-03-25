@@ -8,6 +8,7 @@ const AUTHORIZE_MW = require('../middleware/access/authorize');
 const DELETE_RECIPIE_MW = require('../middleware/recipie/delete-recipie');
 const GET_ALL_RECIPIE_MW = require('../middleware/recipie/get-all-recipie');
 const GET_RECIPIE_MW = require('../middleware/recipie/get-recipie');
+const RATE_MW = require('../middleware/recipie/rate-recipie');
 const REDIRECT_MW = require('../middleware/general/redirect');
 const RENDER_MW = require('../middleware/general/render-page');
 const UPDATE_RECIPIE_MW = require('../middleware/recipie/update-recipie');
@@ -19,7 +20,7 @@ ROUTER.get('/',
 );
 
 // Create new
-ROUTER.get('/new',
+ROUTER.get('/new', // TODO: This feature should be tested
     AUTH_MW({ inverse: false }),
     RENDER_MW({ template: 'create-recipie.ejs' })
 );
@@ -38,26 +39,35 @@ ROUTER.get('/:recipie_id',
 );
 
 // Edit
-ROUTER.get('/:recipie_id/edit',
+ROUTER.get('/:recipie_id/edit', // TODO: Not implemented yet
     AUTH_MW({ inverse: false }),
-    AUTHORIZE_MW({ user_db: USER_STORE }),
     GET_RECIPIE_MW({ recipie_db: RECIPIE_STORE }),
+    AUTHORIZE_MW({ user_db: USER_STORE }),
     RENDER_MW({ template: 'create-recipie.ejs' })
 );
 
 ROUTER.put('/:recipie_id/edit',
     AUTH_MW({ inverse: false }),
-    AUTHORIZE_MW({ user_db: USER_STORE }),
     GET_RECIPIE_MW({ recipie_db: RECIPIE_STORE }),
-    UPDATE_RECIPIE_MW({ recipie_db: RECIPIE_STORE })
+    AUTHORIZE_MW({ user_db: USER_STORE }),
+    UPDATE_RECIPIE_MW({ recipie_db: RECIPIE_STORE }),
+    REDIRECT_MW({ route: '/' })
 );
 
 // Delete
-ROUTER.delete('/:recipie_id/delete',
+ROUTER.delete('/:recipie_id/delete', // TODO: Not implemented yet
     AUTH_MW({ inverse: false }),
-    AUTHORIZE_MW({ user_db: USER_STORE }),
     GET_RECIPIE_MW({ recipie_db: RECIPIE_STORE }),
-    DELETE_RECIPIE_MW({ recipie_db: RECIPIE_STORE })
+    AUTHORIZE_MW({ user_db: USER_STORE }),
+    DELETE_RECIPIE_MW({ recipie_db: RECIPIE_STORE }),
+    REDIRECT_MW({ route: '/' })
+);
+
+// Rate
+ROUTER.post('/:recipie_id/rate',
+    AUTH_MW({ inverse: false }),
+    GET_RECIPIE_MW({ recipie_db: RECIPIE_STORE }),
+    RATE_MW({ recipie_db: RECIPIE_STORE })
 );
 
 module.exports = ROUTER;

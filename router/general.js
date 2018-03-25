@@ -22,12 +22,14 @@ ROUTER.get('/login',
 
 ROUTER.post('/login',
     AUTH_MW({ inverse: true }),
-    LOGIN_MW({ user_db: USER_STORE })
+    LOGIN_MW({ user_db: USER_STORE }),
+    REDIRECT_MW({ route: '/' })
 );
 
 ROUTER.get('/logout',
     AUTH_MW({ inverse: false }),
-    LOGOUT_MW({ })
+    LOGOUT_MW({ }),
+    REDIRECT_MW({ route: '/' })
 );
 
 // Register
@@ -42,7 +44,7 @@ ROUTER.get('/forgotten',
     RENDER_MW({ template: 'forgotten.ejs' })
 );
 
-ROUTER.post('/forgotten',
+ROUTER.post('/forgotten', // TODO: This feature is not ready yet
     AUTH_MW({ inverse: true }),
     FORGOTTEN_MW({ user_db: USER_STORE })
 );
