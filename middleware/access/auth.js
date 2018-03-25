@@ -12,12 +12,11 @@ const AUTHENTICATE = ({ inverse = false }) => {
     return (req, res, next) => {
 
         if (XOR(inverse, 'undefined' === typeof req.session.user)) {
-            console.log('Authentication failed!');
+            console.log('Failed authentication!');
             res.redirect(redirectUrl);
-            return next();
         }
 
-        console.log('Authentication succeeded!');
+        console.log('Successful authentication!');
         return next();
 
     };

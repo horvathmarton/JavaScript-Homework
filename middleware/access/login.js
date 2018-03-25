@@ -8,7 +8,7 @@ const LOGIN = ({ user_db }) => {
             ('undefined' === typeof req.body.password)) {
 
             errorMessage += 'Form data is missing!';
-            console.log(errorMessage);
+            res.locals.alert_danger = errorMessage;
             res.redirect('/login');
 
         }
@@ -16,15 +16,15 @@ const LOGIN = ({ user_db }) => {
         user_db.getUsers().forEach((user) => {
             if (req.body.email === user.email && req.body.password === user.password) {
                 req.session.user = user;
-                console.log('Logged in successfully!');
+                res.locals.alert_success = 'Logged in successfully!';
                 return next();
             }
         });
 
-        res.locals.alert_danger = 'Wrong username or password!';
-        errorMessage += 'Wrong username or password!';
-        console.log(errorMessage);
-        res.redirect('/login');
+        if ('undefined' === typeof req.session.user) {
+            res.locals.alert_danger = 'Wrong username or password!';
+            res.redirect('/login');
+        }
 
     };
 

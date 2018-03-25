@@ -8,7 +8,7 @@ const REDIRECT_MW = require('../middleware/general/redirect');
 const RENDER_MW = require('../middleware/general/render-page');
 
 // Register user
-ROUTER.post('/new', // TODO: This feature should be tested
+ROUTER.post('/new',
     AUTH_MW({ inverse: true }),
     REGISTER_MW({ user_db: USER_STORE }),
     REDIRECT_MW({ route: '/login' })

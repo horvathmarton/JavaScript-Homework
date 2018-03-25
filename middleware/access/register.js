@@ -8,9 +8,8 @@ const REGISTER = ({ user_db }) => {
             ('undefined' === typeof req.body.password)) {
 
             errorMessage += 'Form data is missing!';
-            console.log(errorMessage);
+            res.locals.alert_danger = errorMessage;
             res.redirect('/register');
-            return next();
 
         }
 
@@ -20,6 +19,7 @@ const REGISTER = ({ user_db }) => {
             password: req.body.password
         });
 
+        res.locals.alert_success = 'Registration is successful!';
         res.redirect('/');
         return next();
 
