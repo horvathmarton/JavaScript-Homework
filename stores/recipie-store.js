@@ -1,17 +1,17 @@
 // Átmeneti megoldás (adatbázis mock)
 const recipieStore = [
     {
-        id: 0,
+        id: 1,
         name: 'Marhapörkölt',
         description: 'Lorem ipsum'
     },
     {
-        id: 1,
+        id: 2,
         name: 'Lecsó',
         description: 'Lorem ipsum'
     },
     {
-        id: 2,
+        id: 3,
         name: 'Kuglóf',
         description: 'Lorem ipsum'
     }

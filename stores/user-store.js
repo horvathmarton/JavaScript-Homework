@@ -3,16 +3,19 @@ const userStore = [
     {
         id: 0,
         email: 'admin@admin.com',
+        name: 'Admin Admin',
         password: 'admin'
     },
     {
         id: 1,
         email: 'lorem@ipsum.com',
+        name: 'Lorem Ipsum',
         password: 'lorem'
     },
     {
         id: 2,
         email: 'average@joe.com',
+        name: 'Average Joe',
         password: '1234'
     }
 ];
