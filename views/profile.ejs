@@ -30,42 +30,22 @@
 
     <div class="row text-center">
 
-        <div class="col-12 col-md-6 col-lg-3 p-3">
-            <div class="card">
-                <div class="card-header text-center text-secondary">
-                    <h1 class="d-none d-lg-block">Szecsuáni csirke</h1>
-                    <h3 class="d-block d-lg-none">Szecsuáni csirke</h3>
+        <% recipies.forEach((recipie) => { %>
+            <% if (user.recipies.includes(recipie.id)) { %>
+                <div class="col-12 col-md-6 col-lg-4 p-3">
+                    <div class="card">
+                        <div class="card-header text-center text-secondary">
+                            <h1 class="d-none d-lg-block"><%= recipie.name %></h1>
+                            <h3 class="d-block d-lg-none"><%= recipie.name %></h3>
+                        </div>
+                        <img class="card-img" src=<%= `https://lorempixel.com/640/480/food/${recipie.id}/` %> >
+                        <div class="card-body text-center">
+                            <a class="btn btn-lg btn-outline-secondary" href=<%= `/recipies/${recipie.id}` %> >Megnézem</a>
+                        </div>
+                    </div>
                 </div>
-                <img class="card-img" src="https://lorempixel.com/640/480/food/1/">
-                <div class="card-body text-center">
-                    <a class="btn btn-lg btn-outline-secondary" href="/recipies/1">Megnézem</a>
-                </div>
-            </div>
-        </div>
-        <div class="col-12 col-md-6 col-lg-3 p-3">
-            <div class="card">
-                <div class="card-header text-center text-secondary">
-                    <h1 class="d-none d-lg-block">BBQ Szendivcs</h1>
-                    <h3 class="d-block d-lg-none">BBQ Szendvics</h3>
-                </div>
-                <img class="card-img" src="https://lorempixel.com/640/480/food/3/">
-                <div class="card-body text-center">
-                    <a class="btn btn-lg btn-outline-secondary" href="/recipies/3">Megnézem</a>
-                </div>
-            </div>
-        </div>
-        <div class="col-12 col-md-6 col-lg-3 p-3">
-            <div class="card">
-                <div class="card-header text-center text-secondary">
-                    <h1 class="d-none d-lg-block">Lecsó</h1>
-                    <h3 class="d-block d-lg-none">Lecsó</h3>
-                </div>
-                <img class="card-img" src="https://lorempixel.com/640/480/food/6/">
-                <div class="card-body text-center">
-                    <a class="btn btn-lg btn-outline-secondary" href="/recipies/5">Megnézem</a>
-                </div>
-            </div>
-        </div>
+            <% } %>
+        <% }) %>
 
     </div>
 

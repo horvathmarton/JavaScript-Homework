@@ -5,7 +5,7 @@ const recipieStore = [
         name: 'Marhapörkölt',
         description: 'Lorem ipsum',
         time: 15,
-        difficulty: 'easy',
+        difficulty: 2,
         ratings: {
             1: 5,
             3: 2
@@ -16,7 +16,7 @@ const recipieStore = [
         name: 'Lecsó',
         description: 'Lorem ipsum',
         time: 45,
-        difficulty: 'medium',
+        difficulty: 3,
         ratings: {
             2: 4,
             3: 1

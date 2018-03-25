@@ -4,7 +4,7 @@ const RENDERER = ({ template }) => {
         const opts = {
             logged_id: ('undefined' === typeof req.session.user),
             user: req.session.user,
-            authorized: false
+            authorized: true
         };
         res.render(template, opts);
     }
