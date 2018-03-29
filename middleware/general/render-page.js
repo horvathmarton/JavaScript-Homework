@@ -1,12 +1,14 @@
 const RENDERER = ({ template }) => {
 
+    if ('undefined' === typeof template) {
+        throw Error('No template specified');
+    }
+
     return (req, res) => {
         const opts = {
             logged_id: ('undefined' === typeof req.session.user),
             user: req.session.user,
-            authorized: true,
-            alert_danger: req.session.alert_danger || undefined,
-            alert_success: req.session.alert_success || undefined
+            authorized: true // TODO: Fix
         };
         res.render(template, opts);
     }

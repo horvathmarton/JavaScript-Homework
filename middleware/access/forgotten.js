@@ -1,27 +1,26 @@
 const FORGOTTEN = ({ user_db }) => {
 
-    return (req, res, next) => {
+    if ('undefined' === typeof user_db) {
+        throw Error('No user database specified');
+    }
 
-        let errorMessage = 'Failed to log in: ';
+    return (req, res, next) => {
 
         if (('undefined' === typeof req.body) || ('undefined' === typeof req.body.email)) {
 
-            errorMessage += 'Form data is missing!';
-            res.locals.alert_danger = errorMessage;
+            res.locals.alert_danger = 'Form data is missing!';
             res.redirect('/forgotten');
 
         }
 
         user_db.getUsers().forEach((user) => {
             if (req.body.email === user.email) {
-                console.log('Email address found!');
-                res.send({password: user.password});
+                req.session.alert_success = `Your password is ${user.password}`;
                 return next();
             }
         });
 
-        errorMessage += 'This email address is not registered!';
-        res.locals.alert_danger = errorMessage;
+        res.locals.alert_danger = 'This email address is not registered!';
         res.redirect('/forgotten');
 
     };

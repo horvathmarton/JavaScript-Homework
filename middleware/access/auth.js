@@ -12,11 +12,9 @@ const AUTHENTICATE = ({ inverse = false }) => {
     return (req, res, next) => {
 
         if (XOR(inverse, 'undefined' === typeof req.session.user)) {
-            req.session.alert_danger = 'Must be logged in to access this site!'
+            req.session.alert_danger = 'Must be logged in to access this site!';
             res.redirect(redirectUrl);
         }
-
-        console.log('Successful authentication!');
         return next();
 
     };

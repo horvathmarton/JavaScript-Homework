@@ -1,13 +1,16 @@
 const AUTHORIZE = ({ user_db }) => {
 
+    if ('undefined' === typeof user_db) {
+        throw Error('No user database specified');
+    }
+
     return (req, res, next) => {
 
-        if ('undefined' === typeof user_db) {
-            throw Error('No user database specified');
+        if (!req.session.user.recipies.includes(res.locals.recipie.id)) {
+            req.session.alert_danger('Unauthorized operation on this recipie!');
+            res.redirect('/');
         }
 
-        // Check if the active recipie is owned by the active user
-        // TODO: Implement
         return next();
 
     };

@@ -26,6 +26,18 @@ APP.use(session({
     saveUninitialized: true
 }));
 
+// Alert text handling
+APP.use('/*',
+    (req, res, next) => {
+        res.locals.alert_danger = req.session.alert_danger;
+        res.locals.alert_success = req.session.alert_success;
+
+        delete req.session.alert_danger;
+        delete req.session.alert_success;
+        return next();
+    }
+);
+
 // Routing
 APP.use('/', GENERAL_ROUTER);
 APP.use('/users', USERS_ROUTER);

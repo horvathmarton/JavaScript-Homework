@@ -1,7 +1,7 @@
 const RATER = () => {
 
     return (req, res, next) => {
-        return next();
+        return next(); // TODO: Implement it
     };
 
 };

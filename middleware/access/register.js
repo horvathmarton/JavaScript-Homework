@@ -1,5 +1,9 @@
 const REGISTER = ({ user_db }) => {
 
+    if ('undefined' === typeof user_db) {
+        throw Error('No user database specified');
+    }
+
     return (req, res, next) => {
 
         let errorMessage = 'Failed to register: ';
@@ -8,7 +12,7 @@ const REGISTER = ({ user_db }) => {
             ('undefined' === typeof req.body.password)) {
 
             errorMessage += 'Form data is missing!';
-            res.locals.alert_danger = errorMessage;
+            req.session.alert_danger = errorMessage;
             res.redirect('/register');
 
         }
@@ -19,9 +23,8 @@ const REGISTER = ({ user_db }) => {
             password: req.body.password
         });
 
-        res.locals.alert_success = 'Registration is successful!';
-        res.redirect('/');
-        return next();
+        req.session.alert_success = 'Registration is successful! Please log in!';
+        res.redirect('/login');
 
     };
 

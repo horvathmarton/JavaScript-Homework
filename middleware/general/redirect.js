@@ -1,4 +1,4 @@
-const REDIRECT = ({ route }) => {
+const REDIRECT = ({ route = '/' }) => {
 
     return (req, res, next) => {
         res.redirect(route);
