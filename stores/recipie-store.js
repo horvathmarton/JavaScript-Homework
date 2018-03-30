@@ -55,7 +55,7 @@ const addRecipie = (recipie) => {
 
 const deleteRecipie = (id) => {
     const recipie = getRecipie(id);
-    const index = recipie.indexOf(recipie);
+    const index = recipieStore.indexOf(recipie);
     recipieStore.splice(index, 1);
 };
 

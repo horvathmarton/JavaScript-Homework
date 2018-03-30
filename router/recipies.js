@@ -55,7 +55,7 @@ ROUTER.put('/:recipie_id/edit',
 );
 
 // Delete
-ROUTER.get('/:recipie_id/delete', // TODO: Not implemented yet
+ROUTER.get('/:recipie_id/delete',
     AUTH_MW({ inverse: false }),
     GET_RECIPIE_MW({ recipie_db: RECIPIE_STORE, user_db: USER_STORE }),
     AUTHORIZE_MW({ user_db: USER_STORE }),
