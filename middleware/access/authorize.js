@@ -6,8 +6,8 @@ const AUTHORIZE = ({ user_db }) => {
 
     return (req, res, next) => {
 
-        if (!req.session.user.recipies.includes(res.locals.recipie.id)) {
-            req.session.alert_danger('Unauthorized operation on this recipie!');
+        if (res.locals.recipie.author !== req.session.user.id) {
+            req.session.alert_danger ='Unauthorized operation on this recipie!';
             res.redirect('/');
         }
 

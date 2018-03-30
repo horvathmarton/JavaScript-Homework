@@ -9,7 +9,8 @@ const recipieStore = [
         ratings: {
             1: 5,
             3: 2
-        }
+        },
+        author: 1
     },
     {
         id: 2,
@@ -20,7 +21,8 @@ const recipieStore = [
         ratings: {
             2: 4,
             3: 1
-        }
+        },
+        author: 2
     },
     {
         id: 3,
@@ -28,7 +30,8 @@ const recipieStore = [
         description: 'Lorem ipsum',
         time: 30,
         difficulty: 'hard',
-        ratings: {}
+        ratings: {},
+        author: 1
     }
 ];
 

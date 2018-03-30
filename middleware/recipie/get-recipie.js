@@ -1,7 +1,7 @@
-const RECIPIE_GETTER = ({ recipie_db }) => {
+const RECIPIE_GETTER = ({ recipie_db, user_db }) => {
 
-    if ('undefined' === typeof recipie_db) {
-        throw Error('No recipie database specified');
+    if ('undefined' === typeof recipie_db || 'undefined' === typeof user_db) {
+        throw Error('No recipie or user database specified!');
     }
 
     return (req, res, next) => {
@@ -18,6 +18,7 @@ const RECIPIE_GETTER = ({ recipie_db }) => {
             res.redirect('/');
         }
 
+        res.locals.author = (res.locals.recipie.author === req.session.user.id);
         return next();
 
     };
