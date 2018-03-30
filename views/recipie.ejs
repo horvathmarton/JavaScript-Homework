@@ -12,13 +12,15 @@
     <div class="row m-0">
 
         <% if (authorized) { %>
-            <div class="col-12 bg-dark text-light my-4 py-3 px-5">
+            <div class="col-12 my-4 py-3 px-5">
                 <div class="row text-center">
                     <div class="col-6">
-                        <a class="btn btn-block btn-info rounded-0" href=<%= `/recipies/${recipie.id}/edit` %> >Edit</a>
+                        <a class="nav-link btn btn-lg btn-outline-dark text-dark m-2 btn-menu"
+                           href=<%= `/recipies/${recipie.id}/edit` %>>Edit</a>
                     </div>
                     <div class="col-6">
-                        <a class="btn btn-block btn-danger rounded-0" href=<%= `/recipies/${recipie.id}/delete` %>>Delete</a>
+                        <a class="nav-link btn btn-lg btn-outline-danger text-danger m-2 btn-menu"
+                           href=<%= `/recipies/${recipie.id}/delete` %>>Delete</a>
                     </div>
                 </div>
             </div>
