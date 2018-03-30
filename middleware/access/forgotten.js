@@ -20,8 +20,10 @@ const FORGOTTEN = ({ user_db }) => {
             }
         });
 
-        res.locals.alert_danger = 'This email address is not registered!';
-        res.redirect('/forgotten');
+        if ('undefined' === typeof req.session.alert_success) {
+            req.session.alert_danger = 'This email address is not registered!';
+            res.redirect('/forgotten');
+        }
 
     };
 

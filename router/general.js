@@ -44,9 +44,10 @@ ROUTER.get('/forgotten',
     RENDER_MW({ template: 'forgotten.ejs' })
 );
 
-ROUTER.post('/forgotten', // TODO: This feature is not ready yet
+ROUTER.post('/forgotten',
     AUTH_MW({ inverse: true }),
-    FORGOTTEN_MW({ user_db: USER_STORE })
+    FORGOTTEN_MW({ user_db: USER_STORE }),
+    REDIRECT_MW({ route: '/forgotten' })
 );
 
 module.exports = ROUTER;
