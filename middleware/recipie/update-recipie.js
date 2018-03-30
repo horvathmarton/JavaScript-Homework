@@ -12,16 +12,15 @@ const RECIPIE_UPDATER = ({ recipie_db }) => {
             res.redirect('/');
         }
 
-        recipie_db.addRecipie({
-            id: Math.floor((Math.random() * 1000000) + 1), // TODO: Implement
+        const id = res.locals.recipie || Math.floor((Math.random() * 1000000) + 1);
+        recipie_db.updateRecipie(id, {
+            id: id, // TODO: Implement
             name: 'Lecsó',
             description: 'Lorem ipsum',
             time: 45,
             difficulty: 3,
-            ratings: {
-                2: 4,
-                3: 1
-            }
+            ratings: res.locals.recipie.ratings || {},
+            author: 1
         });
 
         return next();

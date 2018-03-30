@@ -45,7 +45,6 @@ APP.use('/recipies', RECIPIES_ROUTER);
 
 // Error handling
 APP.use((err, req, res, next) => {
-    res.status(500).send('Houston, we have a problem!');
     console.error(err.stack);
 });
 

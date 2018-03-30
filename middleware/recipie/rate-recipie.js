@@ -1,7 +1,14 @@
-const RATER = () => {
+const RATER = ({ }) => {
 
     return (req, res, next) => {
-        return next(); // TODO: Implement it
+
+        if (typeof req.params === 'undefined' || typeof req.params.rating === 'undefined') {
+            req.session.alert_danger = 'No rating specified!';
+            res.redirect('/');
+        }
+
+        res.locals.recipie.ratings[req.session.user.id] = req.params.rating;
+        return next();
     };
 
 };

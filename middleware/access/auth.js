@@ -14,8 +14,9 @@ const AUTHENTICATE = ({ inverse = false }) => {
         if (XOR(inverse, 'undefined' === typeof req.session.user)) {
             req.session.alert_danger = 'Must be logged in to access this site!';
             res.redirect(redirectUrl);
+        } else {
+            return next();
         }
-        return next();
 
     };
 

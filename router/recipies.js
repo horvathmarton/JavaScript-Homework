@@ -64,10 +64,11 @@ ROUTER.get('/:recipie_id/delete', // TODO: Not implemented yet
 );
 
 // Rate
-ROUTER.post('/:recipie_id/rate',
+ROUTER.post('/:recipie_id/rate/:rating',
     AUTH_MW({ inverse: false }),
     GET_RECIPIE_MW({ recipie_db: RECIPIE_STORE, user_db: USER_STORE }),
-    RATE_MW({ recipie_db: RECIPIE_STORE })
+    RATE_MW({ }),
+    UPDATE_RECIPIE_MW({ recipie_db: RECIPIE_STORE })
 );
 
 module.exports = ROUTER;

@@ -1,8 +1,7 @@
 const REDIRECT = ({ route = '/' }) => {
 
-    return (req, res, next) => {
+    return (req, res) => {
         res.redirect(route);
-        return next();
     }
 
 };

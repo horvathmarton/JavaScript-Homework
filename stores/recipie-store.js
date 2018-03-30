@@ -59,7 +59,13 @@ const deleteRecipie = (id) => {
     recipieStore.splice(index, 1);
 };
 
+const updateRecipie = (id, recipie) => {
+    this.deleteRecipie(id);
+    this.addRecipie(recipie);
+};
+
 module.exports.getRecipies = getRecipies;
 module.exports.getRecipie = getRecipie;
 module.exports.addRecipie = addRecipie;
 module.exports.deleteRecipie = deleteRecipie;
+module.exports.updateRecipie = updateRecipie;
