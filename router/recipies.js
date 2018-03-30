@@ -20,7 +20,7 @@ ROUTER.get('/',
 );
 
 // Create new
-ROUTER.get('/new', // TODO: This feature should be tested
+ROUTER.get('/new',
     AUTH_MW({ inverse: false }),
     RENDER_MW({ template: 'create-recipie.ejs' })
 );
@@ -28,7 +28,7 @@ ROUTER.get('/new', // TODO: This feature should be tested
 ROUTER.post('/new',
     AUTH_MW({ inverse: false }),
     UPDATE_RECIPIE_MW({ recipie_db: RECIPIE_STORE }),
-    REDIRECT_MW({ route: '/recipes' })
+    REDIRECT_MW({ route: '/recipies' })
 );
 
 // View one
@@ -39,14 +39,14 @@ ROUTER.get('/:recipie_id',
 );
 
 // Edit
-ROUTER.get('/:recipie_id/edit', // TODO: Not implemented yet
+ROUTER.get('/:recipie_id/edit',
     AUTH_MW({ inverse: false }),
     GET_RECIPIE_MW({ recipie_db: RECIPIE_STORE, user_db: USER_STORE }),
     AUTHORIZE_MW({ user_db: USER_STORE }),
-    RENDER_MW({ template: 'create-recipie.ejs' })
+    RENDER_MW({ template: 'update-recipie.ejs' })
 );
 
-ROUTER.put('/:recipie_id/edit',
+ROUTER.post('/:recipie_id/edit',
     AUTH_MW({ inverse: false }),
     GET_RECIPIE_MW({ recipie_db: RECIPIE_STORE, user_db: USER_STORE }),
     AUTHORIZE_MW({ user_db: USER_STORE }),
@@ -70,5 +70,8 @@ ROUTER.post('/:recipie_id/rate/:rating',
     RATE_MW({ }),
     UPDATE_RECIPIE_MW({ recipie_db: RECIPIE_STORE })
 );
+
+// TODO: Implement image upload
+// TODO: Implement recipie rating
 
 module.exports = ROUTER;

@@ -29,7 +29,7 @@ const recipieStore = [
         name: 'Kuglóf',
         description: 'Lorem ipsum',
         time: 30,
-        difficulty: 'hard',
+        difficulty: 5,
         ratings: {},
         author: 1
     }

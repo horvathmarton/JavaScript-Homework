@@ -8,13 +8,14 @@
 
     <a class="btn btn-outline-secondary float-left d-none d-md-block" href="/"><i class="fa fa-angle-left fa-3x"></i></a>
 
-    <h1 class="text-center display-1 d-none d-md-block text-secondary m-5">Új Recept</h1>
-    <h1 class="text-center d-block d-md-none text-secondary m-5">Új Recept</h1>
+    <h1 class="text-center display-1 d-none d-md-block text-secondary m-5">Recept módosítása</h1>
+    <h1 class="text-center d-block d-md-none text-secondary m-5">Recept módosítása</h1>
 
     <div class="col-10 offset-1 col-md-4 offset-md-4">
-        <form action="/recipies/new" method="post">
+        <form action=<%= `/recipies/${recipie.id}/edit` %> method="post">
             <div class="form-group">
-                <input type="text" class="form-control form-control-lg" id="name" name="name" placeholder="Recept neve" required autofocus>
+                <input type="text" class="form-control form-control-lg" id="name" name="name" placeholder="Recept neve"
+                       value=<%= recipie.name %> required autofocus>
             </div>
             <div class="form-group">
                 <label for="time" class="text-secondary">Elkészítés ideje:</label>
@@ -38,13 +39,14 @@
                 </select>
             </div>
             <div class="form-group">
-                <textarea class="form-control form-control-lg" id="description" name="description" rows="8" placeholder="A recept elkészítésének leírása..." required></textarea>
+                <textarea class="form-control form-control-lg" id="description" name="description" rows="8"
+                          placeholder="A recept elkészítésének leírása..." required><%= recipie.description %>
+                </textarea>
             </div>
-            <div class="custom-file mb-3">
-                <input type="file" class="custom-file-input" id="picture">
-                <label class="custom-file-label" for="picture">Tölts fel egy képet róla... (opcionális)</label>
+            <div class="form-group">
+                <input type="hidden" id="id" name="id" value=<%= recipie.id %> required autofocus>
             </div>
-            <button type="submit" class="btn btn-block btn-outline-secondary mb-5">Létrehozás</button>
+            <button type="submit" class="btn btn-block btn-outline-secondary mb-5">Frissítés</button>
         </form>
     </div>
 
