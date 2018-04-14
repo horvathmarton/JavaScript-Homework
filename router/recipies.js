@@ -1,7 +1,7 @@
 const ROUTER = require('express').Router();
 
-const RECIPIE_STORE = require('../stores/recipie-store');
-const USER_STORE = require('../stores/user-store');
+const RECIPIE_STORE = require('../models/recipie');
+const USER_STORE = require('../models/user');
 
 const AUTH_MW = require('../middleware/access/auth');
 const AUTHORIZE_MW = require('../middleware/access/authorize');
@@ -42,14 +42,14 @@ ROUTER.get('/:recipie_id',
 ROUTER.get('/:recipie_id/edit',
     AUTH_MW({ inverse: false }),
     GET_RECIPIE_MW({ recipie_db: RECIPIE_STORE, user_db: USER_STORE }),
-    AUTHORIZE_MW({ user_db: USER_STORE }),
+    AUTHORIZE_MW({ }),
     RENDER_MW({ template: 'update-recipie.ejs' })
 );
 
 ROUTER.post('/:recipie_id/edit',
     AUTH_MW({ inverse: false }),
     GET_RECIPIE_MW({ recipie_db: RECIPIE_STORE, user_db: USER_STORE }),
-    AUTHORIZE_MW({ user_db: USER_STORE }),
+    AUTHORIZE_MW({ }),
     UPDATE_RECIPIE_MW({ recipie_db: RECIPIE_STORE }),
     REDIRECT_MW({ route: '/' })
 );
@@ -58,7 +58,7 @@ ROUTER.post('/:recipie_id/edit',
 ROUTER.get('/:recipie_id/delete',
     AUTH_MW({ inverse: false }),
     GET_RECIPIE_MW({ recipie_db: RECIPIE_STORE, user_db: USER_STORE }),
-    AUTHORIZE_MW({ user_db: USER_STORE }),
+    AUTHORIZE_MW({ }),
     DELETE_RECIPIE_MW({ recipie_db: RECIPIE_STORE }),
     REDIRECT_MW({ route: '/' })
 );

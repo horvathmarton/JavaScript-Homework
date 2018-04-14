@@ -1,6 +1,6 @@
 const ROUTER = require('express').Router();
 
-const USER_STORE = require('../stores/user-store');
+const USER_STORE = require('../models/user');
 
 const AUTH_MW = require('../middleware/access/auth');
 const FORGOTTEN_MW = require('../middleware/access/forgotten');

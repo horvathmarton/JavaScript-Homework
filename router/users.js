@@ -1,7 +1,7 @@
 const ROUTER = require('express').Router();
 
-const RECIPIE_STORE = require('../stores/recipie-store');
-const USER_STORE = require('../stores/user-store');
+const RECIPIE_STORE = require('../models/recipie');
+const USER_STORE = require('../models/user');
 
 const AUTH_MW = require('../middleware/access/auth');
 const GET_ALL_RECIPIE_MW = require('../middleware/recipie/get-all-recipie');

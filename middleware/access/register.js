@@ -9,7 +9,7 @@ const REGISTER = ({ user_db }) => {
         let errorMessage = 'Failed to register: ';
 
         if (('undefined' === typeof req.body) || ('undefined' === typeof req.body.email) ||
-            ('undefined' === typeof req.body.password)) {
+            ('undefined' === typeof req.body.password) || ('undefined' === typeof req.body.name)) {
 
             errorMessage += 'Form data is missing!';
             req.session.alert_danger = errorMessage;
@@ -17,9 +17,9 @@ const REGISTER = ({ user_db }) => {
 
         }
 
-        user_db.addUser({
-            id: Math.floor((Math.random() * 1000000) + 1),
+        user_db.insert({
             email: req.body.email,
+            name: req.body.name,
             password: req.body.password
         });
 

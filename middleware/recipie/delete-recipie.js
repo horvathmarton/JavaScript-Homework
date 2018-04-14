@@ -13,7 +13,7 @@ const RECIPIE_DELETER = ({ recipie_db }) => {
 
         }
 
-        recipie_db.deleteRecipie(parseInt(req.params.recipie_id));
+        recipie_db.remove({ _id: req.params.recipie_id }, () => {});
         return next();
 
     };

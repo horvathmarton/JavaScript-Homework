@@ -17,18 +17,21 @@ const LOGIN = ({ user_db }) => {
 
         }
 
-        user_db.getUsers().forEach((user) => {
-            if (req.body.email === user.email && req.body.password === user.password) {
-                req.session.user = user;
-                req.session.alert_success = 'Logged in successfully!';
-                return next();
-            }
-        });
+        user_db.findOne({
+            email: req.body.email,
+            password: req.session.password
+        }, (err, result) => {
 
-        if ('undefined' === typeof req.session.user) {
-            req.session.alert_danger = 'Wrong username or password!';
-            res.redirect('/login');
-        }
+            if (err || !result) {
+                req.session.alert_danger = 'Wrong username or password!';
+                res.redirect('/login');
+            }
+
+            req.session.user = user;
+            req.session.alert_success = 'Logged in successfully!';
+            return next();
+
+        });
 
     };
 

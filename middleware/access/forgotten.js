@@ -13,18 +13,19 @@ const FORGOTTEN = ({ user_db }) => {
 
         }
 
-        user_db.getUsers().forEach((user) => {
-            if (req.body.email === user.email) {
-                req.session.alert_success = `Your password is ${user.password}`;
-                return next();
+        user_db.findOne({
+            email: req.body.email
+        }, (err, result) => {
+
+            if (err || !result) {
+                req.session.alert_danger = 'This email address is not registered!';
+                res.redirect('/forgotten');
             }
+
+            req.session.alert_success = `Your password is ${result.password}`;
+            return next();
+
         });
-
-        if ('undefined' === typeof req.session.alert_success) {
-            req.session.alert_danger = 'This email address is not registered!';
-            res.redirect('/forgotten');
-        }
-
     };
 
 };

@@ -1,8 +1,4 @@
-const AUTHORIZE = ({ user_db }) => {
-
-    if ('undefined' === typeof user_db) {
-        throw Error('No user database specified');
-    }
+const AUTHORIZE = ({}) => {
 
     return (req, res, next) => {
 
