@@ -6,8 +6,12 @@ const RECIPIES_GETTER = ({ recipie_db }) => {
 
     return (req, res, next) => {
 
-        res.locals.recipies = recipie_db.getRecipies();
-        return next();
+        recipie_db.find({
+
+        }, (err, result) => {
+            res.locals.recipies = result;
+            return next();
+        });
 
     };
 

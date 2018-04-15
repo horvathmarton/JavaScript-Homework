@@ -4,10 +4,10 @@ const CHECK_REQUEST_BODY = (req) => {
         'undefined' === typeof req.body.description)
 };
 
-const RECIPIE_UPDATER = ({ recipie_db }) => {
+const RECIPIE_UPDATER = ({ recipie_model }) => {
 
-    if ('undefined' === typeof recipie_db) {
-        throw Error('No recipie database specified');
+    if ('undefined' === typeof recipie_model) {
+        throw Error('No recipie model specified');
     }
 
     return (req, res, next) => {
@@ -17,29 +17,21 @@ const RECIPIE_UPDATER = ({ recipie_db }) => {
             res.redirect('/');
         }
 
-        if ('undefined' !== typeof req.body.id || 'undefined' === typeof res.locals.recipie) {
-            const recipie = {
-                name: req.body.name,
-                time: req.body.time,
-                difficulty: req.body.difficulty,
-                description: req.body.description,
-                ratings: {},
-                author: req.session.user.id
-            };
-
-            if ('undefined' === typeof req.body.id) {
-                recipie.id = Math.floor((Math.random() * 1000000) + 1);
-                recipie_db.addRecipie(recipie);
-            } else {
-                recipie.id = req.body.id;
-                recipie_db.updateRecipie(recipie.id, recipie);
-            }
-
+        let recipie = undefined;
+        if ('undefined' === typeof res.locals.recipie) {
+            recipie = new recipie_model();
         } else {
-            recipie_db.updateRecipie(res.locals.recipie.id, res.locals.recipie);
+            recipie = res.locals.recipie;
         }
 
-        return next();
+        recipie.name = req.body.name;
+        recipie.time = req.body.time;
+        recipie.difficulty = req.body.difficulty;
+        recipie.description = req.body.description;
+        recipie.author = req.session.user._id;
+        recipie.save(() => {
+            return next();
+        });
 
     };
 

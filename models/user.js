@@ -6,3 +6,5 @@ const User = db.model('User', {
     name: String,
     password: String
 });
+
+module.exports = User;

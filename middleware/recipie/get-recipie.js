@@ -1,6 +1,6 @@
-const RECIPIE_GETTER = ({ recipie_db, user_db }) => {
+const RECIPIE_GETTER = ({ recipie_db }) => {
 
-    if ('undefined' === typeof recipie_db || 'undefined' === typeof user_db) {
+    if ('undefined' === typeof recipie_db) {
         throw Error('No recipie or user database specified!');
     }
 
@@ -11,15 +11,17 @@ const RECIPIE_GETTER = ({ recipie_db, user_db }) => {
             res.redirect('/');
         }
 
-        res.locals.recipie = recipie_db.getRecipie(parseInt(req.params.recipie_id));
+        recipie_db.findOne({ _id: req.params.recipie_id }, (err, result) => {
 
-        if (null === res.locals.recipie) {
-            req.session.alert_danger = 'Recipie not found!';
-            res.redirect('/');
-        }
+            if (err || !result) {
+                req.session.alert_danger = 'Recipie not found!';
+                res.redirect('/');
+            }
 
-        res.locals.author = (res.locals.recipie.author === req.session.user.id);
-        return next();
+            res.locals.recipie = result;
+            res.locals.author = (res.locals.recipie.author.toString() === req.session.user._id);
+            return next();
+        });
 
     };
 

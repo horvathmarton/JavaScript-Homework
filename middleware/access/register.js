@@ -1,7 +1,7 @@
-const REGISTER = ({ user_db }) => {
+const REGISTER = ({ user_model }) => {
 
-    if ('undefined' === typeof user_db) {
-        throw Error('No user database specified');
+    if ('undefined' === typeof user_model) {
+        throw Error('No user model specified');
     }
 
     return (req, res, next) => {
@@ -17,11 +17,12 @@ const REGISTER = ({ user_db }) => {
 
         }
 
-        user_db.insert({
-            email: req.body.email,
-            name: req.body.name,
-            password: req.body.password
-        });
+        const user = new user_model();
+        user.email = req.body.email;
+        user.name = req.body.name;
+        user.password = req.body.password;
+
+        user.save((err) => {});
 
         req.session.alert_success = 'Registration is successful! Please log in!';
         res.redirect('/login');

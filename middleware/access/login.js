@@ -19,7 +19,7 @@ const LOGIN = ({ user_db }) => {
 
         user_db.findOne({
             email: req.body.email,
-            password: req.session.password
+            password: req.body.password
         }, (err, result) => {
 
             if (err || !result) {
@@ -27,7 +27,7 @@ const LOGIN = ({ user_db }) => {
                 res.redirect('/login');
             }
 
-            req.session.user = user;
+            req.session.user = result;
             req.session.alert_success = 'Logged in successfully!';
             return next();
 

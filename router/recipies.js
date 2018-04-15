@@ -27,37 +27,37 @@ ROUTER.get('/new',
 
 ROUTER.post('/new',
     AUTH_MW({ inverse: false }),
-    UPDATE_RECIPIE_MW({ recipie_db: RECIPIE_STORE }),
+    UPDATE_RECIPIE_MW({ recipie_model: RECIPIE_STORE }),
     REDIRECT_MW({ route: '/recipies' })
 );
 
 // View one
 ROUTER.get('/:recipie_id',
     AUTH_MW({ inverse: false }),
-    GET_RECIPIE_MW({ recipie_db: RECIPIE_STORE, user_db: USER_STORE }),
+    GET_RECIPIE_MW({ recipie_db: RECIPIE_STORE }),
     RENDER_MW({ template: 'recipie.ejs' })
 );
 
 // Edit
 ROUTER.get('/:recipie_id/edit',
     AUTH_MW({ inverse: false }),
-    GET_RECIPIE_MW({ recipie_db: RECIPIE_STORE, user_db: USER_STORE }),
+    GET_RECIPIE_MW({ recipie_db: RECIPIE_STORE }),
     AUTHORIZE_MW({ }),
     RENDER_MW({ template: 'update-recipie.ejs' })
 );
 
 ROUTER.post('/:recipie_id/edit',
     AUTH_MW({ inverse: false }),
-    GET_RECIPIE_MW({ recipie_db: RECIPIE_STORE, user_db: USER_STORE }),
+    GET_RECIPIE_MW({ recipie_db: RECIPIE_STORE }),
     AUTHORIZE_MW({ }),
-    UPDATE_RECIPIE_MW({ recipie_db: RECIPIE_STORE }),
+    UPDATE_RECIPIE_MW({ recipie_model: RECIPIE_STORE }),
     REDIRECT_MW({ route: '/' })
 );
 
 // Delete
 ROUTER.get('/:recipie_id/delete',
     AUTH_MW({ inverse: false }),
-    GET_RECIPIE_MW({ recipie_db: RECIPIE_STORE, user_db: USER_STORE }),
+    GET_RECIPIE_MW({ recipie_db: RECIPIE_STORE }),
     AUTHORIZE_MW({ }),
     DELETE_RECIPIE_MW({ recipie_db: RECIPIE_STORE }),
     REDIRECT_MW({ route: '/' })
@@ -66,9 +66,9 @@ ROUTER.get('/:recipie_id/delete',
 // Rate
 ROUTER.post('/:recipie_id/rate/:rating',
     AUTH_MW({ inverse: false }),
-    GET_RECIPIE_MW({ recipie_db: RECIPIE_STORE, user_db: USER_STORE }),
+    GET_RECIPIE_MW({ recipie_db: RECIPIE_STORE }),
     RATE_MW({ }),
-    UPDATE_RECIPIE_MW({ recipie_db: RECIPIE_STORE })
+    UPDATE_RECIPIE_MW({ recipie_model: RECIPIE_STORE })
 );
 
 // TODO: Implement image upload

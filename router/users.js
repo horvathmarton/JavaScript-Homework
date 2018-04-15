@@ -12,7 +12,7 @@ const RENDER_MW = require('../middleware/general/render-page');
 // Register user
 ROUTER.post('/new',
     AUTH_MW({ inverse: true }),
-    REGISTER_MW({ user_db: USER_STORE }),
+    REGISTER_MW({ user_model: USER_STORE }),
     REDIRECT_MW({ route: '/login' })
 );
 
