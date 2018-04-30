@@ -22,6 +22,7 @@ var setHeart = function (heart) {
 
 var setRatingValue = function () {
     rating_value.value = this.dataset.rating;
+    fetch(`${document.URL}/rate/${rating_value.value}`, { credentials: "same-origin" });
     iterateHearts(setHeart)
 };
 
@@ -30,3 +31,4 @@ var attachListener = function (heart) {
 };
 
 iterateHearts(attachListener);
+iterateHearts(setHeart);

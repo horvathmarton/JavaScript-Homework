@@ -1,7 +1,7 @@
 const ROUTER = require('express').Router();
 
 const RECIPIE_STORE = require('../models/recipie');
-const USER_STORE = require('../models/user');
+const RATING_STORE = require('../models/rating');
 
 const AUTH_MW = require('../middleware/access/auth');
 const AUTHORIZE_MW = require('../middleware/access/authorize');
@@ -34,7 +34,7 @@ ROUTER.post('/new',
 // View one
 ROUTER.get('/:recipie_id',
     AUTH_MW({ inverse: false }),
-    GET_RECIPIE_MW({ recipie_db: RECIPIE_STORE }),
+    GET_RECIPIE_MW({ recipie_db: RECIPIE_STORE, rating_db: RATING_STORE }),
     RENDER_MW({ template: 'recipie.ejs' })
 );
 
@@ -64,14 +64,12 @@ ROUTER.get('/:recipie_id/delete',
 );
 
 // Rate
-ROUTER.post('/:recipie_id/rate/:rating',
+ROUTER.get('/:recipie_id/rate/:rating',
     AUTH_MW({ inverse: false }),
     GET_RECIPIE_MW({ recipie_db: RECIPIE_STORE }),
-    RATE_MW({ }),
-    UPDATE_RECIPIE_MW({ recipie_model: RECIPIE_STORE })
+    RATE_MW({ rating_model: RATING_STORE })
 );
 
-// TODO: Implement image upload
 // TODO: Implement recipie rating
 
 module.exports = ROUTER;
