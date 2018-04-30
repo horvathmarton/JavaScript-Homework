@@ -20,10 +20,10 @@ const FORGOTTEN = ({ user_db }) => {
             if (err || !result) {
                 req.session.alert_danger = 'This email address is not registered!';
                 res.redirect('/forgotten');
+            } else {
+                req.session.alert_success = `Your password is ${result.password}`;
+                return next();
             }
-
-            req.session.alert_success = `Your password is ${result.password}`;
-            return next();
 
         });
     };
