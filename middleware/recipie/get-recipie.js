@@ -18,7 +18,11 @@ const RECIPIE_GETTER = ({ recipie_db, rating_db }) => {
             Promise.all([recipie, rating]).then((results) => {
 
                 res.locals.recipie = results[0];
-                res.locals.rating = results[1].value || 0;
+                if (results[1]) {
+                    res.locals.rating = results[1].value;
+                } else {
+                    res.locals.rating = 0;
+                }
                 res.locals.author = (res.locals.recipie.author.toString() === req.session.user._id);
                 return next();
 
