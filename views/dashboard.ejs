@@ -18,7 +18,7 @@
                         <h1 class="d-none d-lg-block"><%= recipie.name %></h1>
                         <h3 class="d-block d-lg-none"><%= recipie.name %></h3>
                     </div>
-                    <img class="card-img" src=<%= `https://lorempixel.com/640/480/food/${recipie.id}/` %> >
+                    <img class="card-img" src=<%= `/images/${recipie.id}.jpg` %> >
                     <div class="card-body text-center">
                         <a class="btn btn-lg btn-outline-secondary" href=<%= `/recipies/${recipie.id}` %> >Megnézem</a>
                     </div>

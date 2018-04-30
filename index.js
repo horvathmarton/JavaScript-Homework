@@ -1,6 +1,7 @@
 const express = require('express');
 const bodyParser = require('body-parser');
 const session = require('express-session');
+const fileUpload = require('express-fileupload');
 
 const GENERAL_ROUTER = require('./router/general');
 const USERS_ROUTER = require('./router/users');
@@ -16,6 +17,9 @@ APP.set('views engine', 'ejs');
 
 // Static folder
 APP.use(express.static('public'));
+
+// Upload images
+APP.use(fileUpload());
 
 // Configuring vendor modules
 APP.use(bodyParser.urlencoded({ extended: true }));

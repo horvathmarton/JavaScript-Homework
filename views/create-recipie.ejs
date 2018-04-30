@@ -12,7 +12,7 @@
     <h1 class="text-center d-block d-md-none text-secondary m-5">Új Recept</h1>
 
     <div class="col-10 offset-1 col-md-4 offset-md-4">
-        <form action="/recipies/new" method="post">
+        <form action="/recipies/new" method="post" encType="multipart/form-data">
             <div class="form-group">
                 <input type="text" class="form-control form-control-lg" id="name" name="name" placeholder="Recept neve" required autofocus>
             </div>
@@ -41,8 +41,8 @@
                 <textarea class="form-control form-control-lg" id="description" name="description" rows="8" placeholder="A recept elkészítésének leírása..." required></textarea>
             </div>
             <div class="custom-file mb-3">
-                <input type="file" class="custom-file-input" id="picture">
-                <label class="custom-file-label" for="picture">Tölts fel egy képet róla... (opcionális)</label>
+                <input name="image" type="file" class="custom-file-input" required>
+                <label class="custom-file-label" for="picture">Tölts fel egy képet róla... (.jpg formátumban)</label>
             </div>
             <button type="submit" class="btn btn-block btn-outline-secondary mb-5">Létrehozás</button>
         </form>

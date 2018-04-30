@@ -26,7 +26,7 @@
             </div>
         <% } %>
 
-        <img class="img-fluid d-none d-md-block p-0" src="https://lorempixel.com/1920/480/food/9/">
+        <img class="img-fluid d-none d-md-block p-0" src=<%= `/images/${recipie.id}.jpg` %> >
 
         <div class="col-12 bg-dark text-light my-4 p-3">
             <div class="row text-center">
@@ -39,7 +39,16 @@
             <p><%= recipie.description %></p>
         </div>
 
-        <%- include('rating') %>
+        <div class="col-lg-12 text-center mb-5">
+            <div id="rating" class="text-danger display-3">
+                <span class="far fa-heart" data-rating="1"></span>
+                <span class="far fa-heart" data-rating="2"></span>
+                <span class="far fa-heart" data-rating="3"></span>
+                <span class="far fa-heart" data-rating="4"></span>
+                <span class="far fa-heart" data-rating="5"></span>
+            </div>
+            <input id="rating-value" type="hidden" name="rating" class="rating-value" value=0 >
+        </div>
 
     </div>
 
