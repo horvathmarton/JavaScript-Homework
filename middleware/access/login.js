@@ -12,26 +12,28 @@ const LOGIN = ({ user_db }) => {
             ('undefined' === typeof req.body.password)) {
 
             errorMessage += 'Form data is missing!';
-            res.locals.alert_danger = errorMessage;
+            req.session.alert_danger = errorMessage;
             res.redirect('/login');
 
+        } else {
+
+            user_db.findOne({
+                email: req.body.email,
+                password: req.body.password
+            }, (err, result) => {
+
+                if (err || !result) {
+                    req.session.alert_danger = 'Wrong username or password!';
+                    res.redirect('/login');
+                } else {
+                    req.session.user = result;
+                    req.session.alert_success = 'Logged in successfully!';
+                    return next();
+                }
+
+            });
+
         }
-
-        user_db.findOne({
-            email: req.body.email,
-            password: req.body.password
-        }, (err, result) => {
-
-            if (err || !result) {
-                req.session.alert_danger = 'Wrong username or password!';
-                res.redirect('/login');
-            }
-
-            req.session.user = result;
-            req.session.alert_success = 'Logged in successfully!';
-            return next();
-
-        });
 
     };
 
