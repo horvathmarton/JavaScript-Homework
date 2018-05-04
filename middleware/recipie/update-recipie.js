@@ -1,7 +1,7 @@
 const CHECK_REQUEST_BODY = (req) => {
     return ('undefined' === typeof req.body || 'undefined' === typeof req.body.name ||
         'undefined' === typeof req.body.time || 'undefined' === req.body.difficulty ||
-        'undefined' === typeof req.body.description || 'undefined' === typeof req.files.image)
+        'undefined' === typeof req.body.description)
 };
 
 const RECIPIE_UPDATER = ({ recipie_model }) => {
@@ -19,6 +19,11 @@ const RECIPIE_UPDATER = ({ recipie_model }) => {
 
         let recipie = undefined;
         if ('undefined' === typeof res.locals.recipie) {
+
+            if ('undefined' === typeof req.files || 'undefined' === typeof req.files.image) {
+                throw Error('No recipie image specified');
+            }
+
             recipie = new recipie_model();
             const recipieImage = req.files.image;
             recipieImage.mv(`public/images/${recipie._id}.jpg`, (err) => {
@@ -26,6 +31,7 @@ const RECIPIE_UPDATER = ({ recipie_model }) => {
                     console.log(err);
                 }
             });
+
         } else {
             recipie = res.locals.recipie;
         }

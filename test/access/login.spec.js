@@ -1,29 +1,27 @@
 const expect = require('chai').expect;
 
-const login_MW = require('../../middleware/access/login');
+const LOGIN_MW = require('../../middleware/access/login');
 
 const FAKE_USER_DB = {
     findOne: (credentials, callback) => {
+
         const MATCHES = FAKE_USER_DB.users.filter(user => credentials.email === user.email && credentials.password === user.password);
         if (MATCHES.length > 0) {
-            callback(null, MATCHES[0]);
-        } else {
-            callback(null, null);
+            return callback(null, MATCHES[0]);
         }
+
+        return callback(null, null);
+
     },
     users: [
         {
             email: 'admin@admin.com',
             password: 'admin'
-        },
-        {
-            email: 'average@user.com',
-            password: '1234'
         }
     ]
 };
 
-describe('loginMiddleware', () => {
+describe('LoginMiddleware', () => {
     let login;
     let fakeReq;
     let fakeRes;
@@ -31,7 +29,7 @@ describe('loginMiddleware', () => {
     let fakeNext;
 
     beforeEach(() => {
-        login = login_MW({ user_db: FAKE_USER_DB });
+        login = LOGIN_MW({ user_db: FAKE_USER_DB });
         
         fakeReq = {
             session: {},
@@ -53,7 +51,7 @@ describe('loginMiddleware', () => {
     });
 
     it('should throw error if the user database is not specified', () => {
-        expect(() => login_MW({})).to.throw('No user database specified');
+        expect(() => LOGIN_MW({})).to.throw('No user database specified');
         expect(fakeReq.session.user).to.be.undefined;
         expect(nextCalled).to.be.false;
     });
@@ -111,7 +109,7 @@ describe('loginMiddleware', () => {
     it('should send success message, create session and call next if existing email and correct password given', () => {
         login(fakeReq, fakeRes, fakeNext);
         expect(fakeReq.session.alert_success).to.be.equal('Logged in successfully!');
-        expect(fakeReq.session.user).to.deep.equal({ email: 'admin@admin.com', password: 'admin' });
+        expect(fakeReq.session.user).to.deep.equal(FAKE_USER_DB.users[0]);
         expect(nextCalled).to.be.true;
     });
 });

@@ -1,21 +1,23 @@
 const RECIPIE_GETTER = ({ recipie_db, rating_db }) => {
 
     if ('undefined' === typeof recipie_db) {
-        throw Error('No recipie or user database specified!');
+        throw Error('No recipie database specified!');
     }
 
     return (req, res, next) => {
 
         if (typeof req.params === 'undefined' || typeof req.params.recipie_id === 'undefined') {
+
             req.session.alert_danger = 'No recipie id specified!';
-            res.redirect('/');
+            return res.redirect('/');
+
         }
 
         if (rating_db) {
 
-            const recipie = recipie_db.findOne({ _id: req.params.recipie_id }).exec();
-            const rating = rating_db.findOne({ recipie: req.params.recipie_id, user: req.session.user._id }).exec();
-            Promise.all([recipie, rating]).then((results) => {
+            const recipie = recipie_db.findOne({_id: req.params.recipie_id}).exec();
+            const rating = rating_db.findOne({recipie: req.params.recipie_id, user: req.session.user._id}).exec();
+            return Promise.all([recipie, rating]).then((results) => {
 
                 res.locals.recipie = results[0];
                 if (results[1]) {
@@ -25,24 +27,21 @@ const RECIPIE_GETTER = ({ recipie_db, rating_db }) => {
                 }
                 res.locals.author = (res.locals.recipie.author.toString() === req.session.user._id);
                 return next();
-
-            });
-
-        } else {
-
-            recipie_db.findOne({ _id: req.params.recipie_id }, (err, result) => {
-
-                if (err || !result) {
-                    req.session.alert_danger = 'Recipie not found!';
-                    res.redirect('/');
-                }
-
-                res.locals.recipie = result;
-                res.locals.author = (res.locals.recipie.author.toString() === req.session.user._id);
-                return next();
             });
 
         }
+
+        recipie_db.findOne({ _id: req.params.recipie_id }, (err, result) => {
+            if (err || !result) {
+                res.locals.alert_danger = 'Recipie not found!';
+                return res.redirect('/');
+
+            }
+
+            res.locals.recipie = result;
+            res.locals.author = (res.locals.recipie.author.toString() === req.session.user._id);
+            return next();
+        });
 
     };
 
